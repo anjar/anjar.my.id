@@ -1,0 +1,27 @@
+---
+title: MongoDB Export dan Import
+publishDate: 2015-02-23T14:21:29.070Z
+category: Database
+tags:
+- mongodb
+- export
+- import
+
+---
+**MongoDB** **Export** dan **Import**, sama seperti halnya ketika kita  menggunakan database MySQL atau PostgreSQL. tentunya kita akan melakukan backup database secara rutin untuk persiapan jikalau database yang saat ini live rusak ataupun problem serius, di MongoDB pun perlu melakukan backup atau export database ke sebuah file.
+
+Untuk melakukan MongoDB Export dan Import , kita dapat menggunakan perintah mongoexport, misal kita akan melakukan export database "anjar", gunakan perintah seperti berikut :
+```bash
+mongodump -d anjar -o /home/anjar/backupdb
+```
+Perintah diatas akan menghasilkan file berupa nama dari collections atau tabel&nbsp;dari database yang dipilih berupa JSON dan file BSON.
+
+Untuk melakukan backup database yant telah&nbsp;terotentifikasi seperti yang telah di jelaskan di artikel "[Menambahkan User dan Memberikan Akses User di Mongodb](/article/60ddb1a0d9ec5000088b5e7a/menambahkan-user-dan-memberikan-akses-user-di-mongodb)", dapat menambahkan option kedalam perintah mongodump, seperti contoh berikut:
+```bash
+mongodump -u anjarF -p passwordMongo --authenticationDatabase admin -d anjar -o /home/anjar/backupdb
+```
+Untuk melakukan import database mongodb dari file backup dapat menggunakan perintah "```mongorestore```", contoh untuk import database dari file backup :
+```bash
+mongorestore --db anjar /home/anjar/backupdb
+```
+Perintah diatas akan melakukan import dari file yang telah di backup sebelumnya yang berada di dalam folder */home/anjar/backupdb*, perintah ini akan melakukan restore data tanpa menampilkan log error, jadi anda harus cek file log error mongodb untuk mencari tahu error yang terjadi.

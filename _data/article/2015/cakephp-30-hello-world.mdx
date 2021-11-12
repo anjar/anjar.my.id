@@ -1,0 +1,25 @@
+---
+title: CakePHP 3.0 Hello World
+publishDate: 2015-03-25T17:43:29.070Z
+category: Programming
+tags:
+- cakephp
+image : /assets/img/post/cakephp3.0.jpg
+---
+Kabar gembira bagi kita semua :v (kayak iklan kulit manggis aja :D). Yup, ada kabar yang sangat menggembirakan, CakePHP 3.0 telah rilis, setelah menunggu berbulan-bulan, akhirnya penantian usai sudah, dengan rilisnya CakePHP versi 3 ini. 
+
+Berhubung sudah rilis, ada baiknya kita sedikit review dan coba CakePHP 3 ini, jangan lupa buka CookBook CakePHP biar lebih jelas. Sama seperti beberapa Framework lainnya, kita juga bisa pakai Composer untuk instalasi CakePHP, pertama pastikan Composer telah terinstall. Sebelum menggunakan CakePHP, ada beberapa requirement yang harus di install terlebih dahulu, diantaranya *mbstring, mbcrypt, dan intl extension*.
+```bash
+composer create-project --prefer-dist cakephp/app cake3
+```
+Silahkan seduh kopi dulu, karna proses download cakephp lumayan lama (kalo koneksi inetnya lemot sih). kalo udah selesai coba perhatiin baik-baik struktur foldernya, wow beda jauh dari CakePHP versi 2. Kira-kira seperti gambar di bawah :
+
+Nah, ada lagi nih kabar gembiranya, di versi baru ini CakePHP juga udah ada Development Server lho kayak Laravel tuh. Kalo proses Composer udah kelar, langsung aja kita CD ke folder bin trus coba buat jalanin servernya dengan perintah di bawah :
+```bash
+bin/cake server
+```
+Atau juga bisa dengan menggunakan option -H untuk IP(host) dan -p untuk port, contoh :
+```bash
+bin/cake server -H 192.168.33.10 -p 3876
+```
+Dan CakePHP 3.0 siap digunakan untuk keperluan development.

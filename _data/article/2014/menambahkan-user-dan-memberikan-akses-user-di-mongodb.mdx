@@ -1,0 +1,61 @@
+---
+title: Menambahkan User dan Memberikan Akses User di Mongodb
+publishDate: 2014-09-16T17:51:29.070Z
+category: Database
+tags:
+- Mongodb
+- ACL
+
+---
+
+
+Setelah seblumnya kita telah membahas bagimana *[cara install mongodb](/2014/05/cara-install-mongodb-di-mac-os-x-ubuntu-dan-windows-7/)*, kali ini kita akan mencoba bagaimana cara membuat user admin di MongoDB dan memberi akses user untuk suatu database yang akan digunakan untuk keperluan aplikasi kita, misal database yang akan digunakan adalah "anjar" dan user yang dapat mengakses database tersebut adalah "**anjarDB**".
+
+Pertama jalankan server mongodb dengan perintah:
+```bash
+mongod
+```
+Kemudian buka terminal atau console dan lakukan koneksi ke MongoDB server, &nbsp;jika belum pernah membuat user lakukan dengan perintah "mongo". Kemudian&nbsp;buat satu user untuk admin dengan perintah sebagai berikut
+```bash
+use admin
+db.createUser({
+	user: "dbAdmin",
+	pwd: "admin123",
+	roles:
+	[{
+		role: "userAdminAnyDatabase",
+		db: "admin"
+	}]
+})
+```
+Langkah selanjutnya kita akan mencoba dengan mencoba login dengan user tersebut, silahkan disconnect dari server ubuntu, atau buka 1 terminal atau console lagi, kemudian coba&nbsp;login&nbsp;ke server MongoDB dengan perintah :
+
+```bash
+mongo --port 27017 -u dbAdmin -p admin123 --authenticationDatabase admin
+```
+Setelah authentikasi sukses selanjutnya kita akan coba membuat satu user admin untuk satu database tertentu. gunakan perintah berikut :
+
+```bash
+use anjar
+db.createUser({
+	user: "anjarDB",
+	pwd: "anjar123",
+	roles:
+		[{
+			role: "userAdmin",
+			db: "anjar"
+		}]
+})
+```
+Kemudian kita coba untuk memberikan akses user ke database "*anjar*" yang telah kita buat tadi dengan perintah berikut :
+```bash
+use anjar
+db.runCommand( {
+	grantRolesToUser: "anjarDB",
+	roles: [
+		"readWrite"
+	],
+	writeConcern: { w: "majority" , wtimeout: 2000 }
+})
+```
+Kemudian coba lakukan koneksi di coding anda dengan user tadi yang telah kita buat.

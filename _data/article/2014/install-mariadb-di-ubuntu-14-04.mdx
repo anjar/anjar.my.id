@@ -1,0 +1,32 @@
+---
+title: Install MariaDB di Ubuntu 14.04
+publishDate: 2014-11-18T11:06:29.070Z
+category: Database
+tags:
+- install
+- mariadb
+image : /assets/img/post/mariadb.png
+
+---
+MariaDB merupakan salah satu database yang sangat mirip dengan MySQL. Sang pembuatpun juga masih orang yang sama sih dengan pembuat MySQL dulu.  Semenjak MySQL di akuisisi oleh Oracle. Monty Program memisahkan dirinya dengan MySQL dan Oracle dan membuat satu database baru yg merupakan cloning dari MySQL, yaitu MariaDB.
+
+Untuk cara penggunaaannya pun sangat sama dengan MySQL, bahkan drivernya pun juga sama. jadi tidak perlu repot-repot untuk mencari driver baru untuk bahasa PHP misalnya. Nah kali ini kita akan membahas cara install MariaDB di Ubuntu 14.04 x64.
+
+Langkah pertama kita tambahkan dulu repo ke dalam repository Ubuntu 14.04.
+```bash
+sudo apt-get install software-properties-common
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
+sudo add-apt-repository 'deb http://mariadb.biz.net.id//repo/10.1/ubuntu trusty main'
+```
+Kemudian update repository dan install MariaDB :
+```bash
+sudo apt-get update
+sudo apt-get install mariadb-server
+```
+
+Biarkan proses instalasi berjalan sampai meminta password untuk user Root, masukan password yang di inginkan. Kemudian lakukan testing dengan perintah :
+```bash
+mysql -u root -p
+```
+
+Jika muncul seperti gambar di bawah, berarti MariaDB sudah sukses terinstall, selanjutnya selamat membuat aplikasi dengan menggunakan MariaDB. :p
