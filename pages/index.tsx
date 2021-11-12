@@ -1,15 +1,15 @@
-/* eslint-disable import/no-unresolved */
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+// eslint-disable-next-line import/no-unresolved
 import { pick } from 'contentlayer/utils';
+import { InferGetStaticPropsType } from 'next';
 
-// import BaseLayout from 'layout/base';
-// import ArticleHomepage from 'components/article/homepage';
-// import LatestProject from 'components/project/homepage';
-// import MetaTag from 'components/shared/meta-tag';
+import BaseLayout from 'layout/base';
+import ArticleHomepage from 'components/article/homepage';
+import LatestProject from 'components/project/homepage';
+import MetaTag from 'components/shared/meta-tag';
 
-import type { ArticleApi } from 'types';
 import { allArticles } from '.contentlayer/data';
 
 export const getStaticProps = async () => {
@@ -21,53 +21,62 @@ export const getStaticProps = async () => {
   return { props: { posts } };
 };
 
-type Props = {
-  posts: ArticleApi[]
-}
-const Home: NextPage<Props> = ({ posts }: Props) => (
-  <>
-    {posts.map(({
-      title, slug, image,
-    } :ArticleApi, idx: number) => {
-      const x = Math.floor(Math.random() * 256);
-      const y = Math.floor(Math.random() * 256);
-      const z = Math.floor(Math.random() * 256);
-      const bgColor = `rgb(${x},${y},${z})`;
-      let bgStyle = { };
-      if (!image) {
-        bgStyle = { backgroundColor: bgColor };
-      }
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
+  <BaseLayout>
+    <MetaTag title="Anjar Febrianto - Husband, Father, Programmer and ProGamer wannabe" />
+    <div className="flex flex-col text-center ">
+      <div>
+        <Image src="/user.png" width="155" height="155" alt="User Image" />
+      </div>
+      <div>
+        <h1 className="text-4xl font-bold">Anjar Febrianto</h1>
+        <p className="text-sm">Husband / Father / Programmer / ProGamer</p>
+      </div>
+    </div>
 
-      return (
-        <article
-          key={`posts_${idx.toString()}`}
-          className="relative w-full h-64 bg-cover bg-center group overflow-hidden shadow-lg hover:shadow-2xl  transition duration-300 ease-in-out rounded-lg"
-          style={bgStyle}
-        >
-          {image && (
-          <Image
-            alt="Mountains"
-            src={image}
-            layout="fill"
-            objectFit="cover"
-            quality={90}
-          />
-          ) }
-          <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:opacity-75 transition duration-300 ease-in-out" />
-          <div className="relative w-full h-full px-4 sm:px-6 lg:px-4 flex justify-center items-center">
-            <h3 className="text-center">
-              <Link href={`/article/${slug}`}>
-                <a className="text-white text-lg font-bold">
-                  <span className="absolute inset-0" />
-                  {title}
-                </a>
-              </Link>
-            </h3>
-          </div>
-        </article>
-      );
-    })}
-  </>
+    <section className="mt-6 mb-6">
+
+      <h3 className="mb-4">
+        <Link href="/article">
+          <a className="text-2xl font-bold">
+
+            My Latest Posts
+          </a>
+        </Link>
+      </h3>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <ArticleHomepage posts={posts} />
+      </div>
+
+    </section>
+
+    <section className="mt-6 mb-6">
+      <h3 className="mb-4">
+        <Link href="/article">
+          <a className="text-2xl font-bold">
+            My Latest Work
+          </a>
+        </Link>
+      </h3>
+
+      <div className="grid grid-cols-1 gap-6 ">
+        <LatestProject />
+      </div>
+    </section>
+
+    <section className="mt-6 mb-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+      <h3 className="mb-4">
+        <Link href="/article">
+          <a className="text-2xl font-bold">
+
+            My Latest Video
+          </a>
+        </Link>
+      </h3>
+
+    </section>
+  </BaseLayout>
 
 );
 

@@ -4,7 +4,7 @@ import TagManager from 'react-gtm-module';
 import { useEffect } from 'react';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import 'styles/font-awesome.css';
-import 'styles/tailwind.css';
+import 'tailwindcss/tailwind.css';
 
 config.autoAddCss = false;
 
