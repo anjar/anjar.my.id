@@ -1,12 +1,11 @@
 import { FunctionComponent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { ArticleApi } from 'types';
-
 import EllipsisText from 'lib/ellipsis-text';
+import type { Article } from '.contentlayer/types';
 
 type Props = {
-  posts: ArticleApi[]
+  posts: Article[]
 }
 const Headline:FunctionComponent<Props> = ({ posts }: Props) => {
   if (!posts) {
@@ -32,7 +31,7 @@ const Headline:FunctionComponent<Props> = ({ posts }: Props) => {
     <>
       {posts.map(({
         title, slug, image,
-      } :ArticleApi, idx: number) => {
+      } :Article, idx: number) => {
         const x = Math.floor(Math.random() * 256);
         const y = Math.floor(Math.random() * 256);
         const z = Math.floor(Math.random() * 256);

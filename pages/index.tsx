@@ -3,13 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 // eslint-disable-next-line import/no-unresolved
 import { pick } from 'contentlayer/utils';
-import { InferGetStaticPropsType } from 'next';
 
 import BaseLayout from 'layout/base';
 import ArticleHomepage from 'components/article/homepage';
 import LatestProject from 'components/project/homepage';
 import MetaTag from 'components/shared/meta-tag';
 
+import type { Article } from '.contentlayer/types';
 import { allArticles } from '.contentlayer/data';
 
 export const getStaticProps = async () => {
@@ -21,7 +21,10 @@ export const getStaticProps = async () => {
   return { props: { posts } };
 };
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
+type Props = {
+  posts: Article[]
+}
+const Home: NextPage<Props> = ({ posts }: Props) => (
   <BaseLayout>
     <MetaTag title="Anjar Febrianto - Husband, Father, Programmer and ProGamer wannabe" />
     <div className="flex flex-col text-center ">
