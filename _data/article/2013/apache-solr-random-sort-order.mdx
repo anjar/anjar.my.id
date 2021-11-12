@@ -1,0 +1,25 @@
+---
+title: Apache SOLR Random Sort Order
+publishDate: 2013-05-19T22:45:29.070Z
+category: Apache
+tags:
+- solr
+- random
+image : /assets/img/post/solr.png
+
+---
+
+Random Sort Order Apache SOLR adalah salah satu cara untuk menghasilkan result random di apache solr seperti halnya "*order by rand()*" di MySQL adalah dengan menambahkan dynamic field random di schema.xml.
+Pertama tambahkan type field random berikut di *schema.xml* 
+
+```xml
+<fieldType  name="rand"  class="solr.RandomSortField"  indexed="true" />
+```
+Kemudian tambahkan field random di schema.xml 
+
+```xml
+<dynamicField  name="random*"  type="rand"  indexed="true"  stored="false" />
+```
+Kemudian restart solr.&nbsp;Untuk mendapatkan hasil random dapat dengan mengorder by random field , contoh sort=random_1234 , buka browser lalu coba untuk random lalu akses di browser.
+
+[http://localhost:8983/solr/select?q=*%3A*&amp;sort=random_121+desc&amp;wt=xml&amp;indent=true](http://localhost:8983/solr/select?q=*:*&amp;sort=random_121%20desc&amp;wt=xml&amp;indent=true)

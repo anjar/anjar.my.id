@@ -1,0 +1,60 @@
+---
+title: Composer di HHVM
+publishDate: 2014-12-12T13:30:29.070Z
+category: Server
+tags:
+- composer
+---
+
+Sebelumnya kita sudah membahas bagaimana cara install [HHVM dengan Nginx](/article/60ddb6da90ee5a00082ef654/hhvm-nginx-di-ubuntu-server-1404). Kali ini kita akan membahas instalasi Composer di HHVM Install Composer di HHVM ini sedikit berbeda dengan kita install menggunakan PHP. Jika menggunakan instalasi seperti :
+```bash
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+```
+Maka akan mendapatkan error seperti berikut :
+```bash
+All settings correct for using Composer
+Downloading...
+SlowTimer [5544ms] at curl: https://getcomposer.org/composer.phar
+Download failed: Failed to open https://getcomposer.org/composer.phar (Resolving timed out after 5545 milliseconds)
+Downloading...
+SlowTimer [5525ms] at curl: https://getcomposer.org/composer.phar
+Download failed: Failed to open https://getcomposer.org/composer.phar (Resolving timed out after 5526 milliseconds)
+Downloading...
+SlowTimer [5537ms] at curl: https://getcomposer.org/composer.phar
+Download failed: Failed to open https://getcomposer.org/composer.phar (Resolving timed out after 5537 milliseconds)
+The download failed repeatedly, aborting.
+```
+Untuk download installer composer kita bisa menggunakan wget :
+```bash
+sudo wget https://getcomposer.org/installer
+```
+Setelah selesai di download, kita bisa melakukan instalasi dengan
+```bash
+hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 installer
+sudo mv composer.phar /usr/local/bin/composer
+sudo rm installer
+```
+Kemudian coba ketikan perintah "*composer*". kemudian kita akan melakukan sedikit tricky untuk menggunakan alias :
+```bash
+alias composer="hhvm -v ResourceLimit.SocketDefaultTimeout=60 -v Http.SlowQueryThreshold=60000 -v Eval.Jit=false /usr/local/bin/composer"
+```
+Untuk menjalankannya secara permanent, tambahkan di file *~/.bashrc*  dan lakukan update ```source ~/.bashrc```. Silahkan coba gunakan laravel, &nbsp;jika terdapat error seperti berikut saat menggunakan composer misal :
+```bash
+composer create-project laravel/laravel laravel
+```
+Jika keluar error seperti dibawah maka sebaiknya upgrade hhvm anda ke versi 3.4.0 keatas.
+
+```bash
+SlowTimer [30001ms] at curl: https://packagist.org/p/provider-archived$e610d0d7d635302e2456ccb79e1b9e2eec2b54e3228cada28a93016b15b80e2f.json
+SlowTimer [30001ms] at curl: https://packagist.org/p/provider-archived$e610d0d7d635302e2456ccb79e1b9e2eec2b54e3228cada28a93016b15b80e2f.json
+SlowTimer [30001ms] at curl: https://packagist.org/p/provider-archived$e610d0d7d635302e2456ccb79e1b9e2eec2b54e3228cada28a93016b15b80e2f.json
+
+[Composer\Downloader\TransportException]
+The "https://packagist.org/p/provider-archived$e610d0d7d635302e2456ccb79e1b9e2eec2b54e3228cada28a93016b15b80e2f.json" file could not be downloaded: Failed to open https://packagist.org/p/provider-archived$e610d0d7d635302e2456ccb79e1b9e2eec2b54e3228cada28a93016b15b80e2f.json (Operation timed out after 29863 milliseconds with 933645 out of 998855 bytes received)
+
+create-project [-s|--stability="..."] [--prefer-source] [--prefer-dist] [--repository-url="..."] [--dev] [--no-dev] [--no-plugins] [--no-custom-installers] [--no-scripts] [--no-progress] [--keep-vcs] [--no-install] [package] [directory] [version]
+
+  
+
+```

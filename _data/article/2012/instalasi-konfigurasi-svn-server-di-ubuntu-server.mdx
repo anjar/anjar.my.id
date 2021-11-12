@@ -1,0 +1,188 @@
+---
+title: Instalasi & Konfigurasi SVN Server di Ubuntu Server
+publishDate: 2012-12-20T11:13:29.070Z
+category: Server
+tags:
+- svn
+- Ubuntu
+
+---
+
+Subversion atau SVN server sering digunakan dalam suatu project, nah kebetulan juga baru aja selesai konfigurasi svn server di ubuntu server, sekalian aja deh di catet langkah-langkahnya di blog saya :p.  ada beberapa persiapan sebelum kita mulai installasi svn server berikut persiapan yang dibutuhkan:
+
+- Linux Ubuntu (ubuntu server 12.04).
+- Apache Web Server.
+- Koneksi Internet.
+- Modul apache DAV_SVN (digunakan untuk akses svn via http).
+- modul apache ssl (digunakan untuk akses svn via https).
+- ssh (digunakan untuk akses svn via svn+ssh).
+
+Sebelum melakukan instalasi svn, pastikan repository ubuntu telah uptodate.
+
+```bash
+sudo apt-get update
+```
+Kemudian install (subversion) SVN:
+
+```bash
+sudo apt-get install subversion
+```
+
+Ada beberapa cara dalam konfigurasi dan penggunaan svn server diantaranya akses svn (subversion) melalui:
+
+ - **File**. 
+	 - Metode ini adalah dengan membuat repositori pada direktori dan akses langsung ke direktori yang menjadi repositori tersebut, "***file:///home/svn/repo1***".
+ - **HTTP**
+	 - Metode dengan membuat repositori pada direktori dan akses ke repositori tersebut melalui web (WebDAV protocol) dengan modul apache2, "***http://127.0.0.1/svn/repo2/***".
+- **SVN**
+	 - Metode ini menggunakan custom protokol untuk mengakses ke *svnserve*  server, "***svn://127.0.0.1/svn/repo4***
+- **SVN+SSH** 
+	- Metode ini sama dengan metode svn, hanya saja ditambahkan dengan ssh tunel, "***svn+ssh://127.0.0.1/svn/repo5***
+
+Berikut adalah beberapa cara untuk melakukan konfigurasi dalam membuat repositori svn:
+
+#### 1. FILE
+Buat direktori untuk repositori svn
+
+```bash
+sudo mkdir /home/svn
+cd /home/svn
+sudo mkdir repo1
+```
+untuk membuat repositori dapat menggunakan perintah
+```bash 
+svnadmin
+sudo svnadmin create /home/svn/repo1 
+```
+Jangan lupa untuk mengubah permission (hak akses) dari direktori yang di jadikan repositori tersebut
+
+```bash
+cd /home/svn
+sudo chmod -R g+rws repo1
+```
+
+Untuk mengakses repositori tersebut dapat dengan menggunakan perintah:
+
+```bash
+svn co file:///home/svn/repo1
+```
+
+#### 2. HTTP
+untuk membuat repositori lakukan langkah yang sama dengan cara diatas.
+
+```bash
+cd /home/svn
+sudo mkdir repo2
+sudo chown -R www-data:subversion repo2
+sudo chmod -R g+rws repo2
+```
+
+Sebelum melakukan konfigurasi, pastikan modul dav (***libapache2-svn)*** telah terinstall. kemudian buka file */etc/apache2/mods-available/dav_svn.conf* dan tambahakn baris berikut:
+
+```bash
+<Location /svn/repo2><br />
+  DAV svn<br />
+  SVNPath /home/svn/repo2<br />
+  AuthType Basic<br />
+  AuthName "Repositori ke-2 viva web"<br />
+  AuthUserFile /home/svn/repo2/passwd<br />
+  Require valid-user<br />
+ </Location>
+```
+
+note:  **location** adalah lokasi url untuk mengakses via http. **AuthUserFile**  adalah file list untuk user svn.
+Kemudian restart apache:
+
+```bash
+sudo /etc/init.d/apache2 restart
+```
+Langkah selanjutnya adalah dengan membuat file "*passwd*" di */home/svn/repo2/passwd* yang akan digunakan sebagai informasi detail dari user svn dalam mengakses repositori. Untuk menambahkan user dapat menggunakan perintah:
+
+```bash
+sudo htpasswd -c /home/svn/repo2/passwd anxfeb
+```
+akan muncul line baru dan meminta kita untuk mengisi password untuk user yang telah kita buat tersebut, masukkan password yang di inginkan dan file passwd otomatis terbuat path yang sudah kita tentukan tadi. jika ingin menambah user maka hilangkan "***-c***" pada perintah di atas, "***-c***" berfungsi untuk membuat file (create):
+
+```bash
+sudo htpasswd /home/svn/repo2/passwd febri
+```
+untuk mengakses repositori tersebut gunakan perintah:
+
+```bash
+svn co http://localhost/svn/repo2ct --username andzhar
+```
+
+#### 3. HTTPS
+Untuk konfigurasi metode ini sama dengan konfigurasi via http diatas, pastikan saja "*https*" bisa di akses dari web server anda.
+
+#### 4. SVN
+Pertama buat kembali repositori baru
+
+```bash
+cd /home/svn
+sudo mkdir repo4
+sudo chmod -R g+rws repo4
+```
+
+Kemudian edit file "***/home/svn/repo4/conf/svnserve.conf***" untuk konfigurasi akses ke repositori. Uncomment bagian berikut:
+
+```bash
+# [general]
+# password-db = passwd
+```
+
+Setelah kita merubah bagian tersebut, kita dapat memanage user-user pada file "*passwd*" pada direktori yang sama, buka file "*passwd*" tersebut dan tambahkan user-user yang dapat mengakses repositori tersebut dengan format "*username=password*".
+
+```bash
+andzhar=12345
+```
+Kemudan jalankan "*svnserve*" agar repositori yang telah dibuat dapat diakses melalui metode *svn:///*  dengan perintah:
+
+```bash
+svnserve -d -r /home/svn/repo4
+```
+Untuk &nbsp;perintah checkout repositori gunakan perintah:
+
+```bash
+svn co svn://127.0.0.1/repo4--username andzhar
+```
+note: default port yang digunakan oleh svn adalah **3690**
+
+#### 5. SVN+SSH
+Metode ini sebenarnya kurang diperlukan dalam menjalankan/mengakses repositori SVN. Konfigurasi ini sampir sama dengan konfigurasi dengan metode ***SVN* **hanya saja pastikan ubuntu anda dapat diakses dengan menggunakan "*ssh*", kemudian checkout repositori dengan perintah:
+
+```bash
+svn co svn+ssh://127.0.0.1/repo4 --username andzhar
+```
+
+Untuk membuat *svnserve* run pada saat pc/komputer anda restart, adna perlu membuat 1 file baru pada init.d:
+
+```bash
+sudo nano /etc/init.d/svnserve
+```
+Kemudian tambahakn perintah svnserve tadi kedalam file tersebut,:
+
+```bash
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          svnserve
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start subversion server
+### END INIT INFO
+svnserve -d -r /home/svn/repo4
+```
+Pastikan skirp tersebut dapat di eksekusi:
+
+```bash
+sudo chmod +x /etc/init.d/svnserve
+```
+kemudian gunakan update-rc.d untuk menambahakn skirp tersebut ke init.
+
+```bash
+update-rc.d svnserve defaults
+```
+
+Selamat Mencoba :)

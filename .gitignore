@@ -36,6 +36,7 @@ yarn-error.log*
 public/robots.txt
 public/sitemap.xml
 __BACKUPP
+tsconfig.tsbuildinfo
 
 # Contentlayer
 .contentlayer

@@ -1,0 +1,33 @@
+---
+title:  "Tips limit CPU/Memory di WSL 2 agar tidak boros memory"
+publishDate: 2021-02-02T17:43:29.070Z
+category: Programming
+tags : [WSL, Windows, Docker]
+
+---
+**WSL** (Windows Sub Linux) itu salah satu fitur unggulan dari Windows, yang ditujukan untuk developer untuk running GNU/Linux environment tanpa harus menggunakan dual-boot atau virtual machine. 
+
+Nah di WSL 2 ini ada salah satu fitur yaitu bisa menggunakan docker secara native. Jadi ada konfigurasi baru di Docker untuk menggunakan WSL 2 Engine dan menggantikan Hyper-V.
+
+![Docker With WSL 2](https://i.ibb.co/1K2GXj2/WSL-Tips-Docker-Setting.png)
+
+
+Docker Dekstop ini juga akan menggunakan fitur dynamic memory allocation-nya WSL 2. Walaupun ini fitur yang bagus, tapi ternyata ada masalah dengan konsumsi memory di Windows,  ketika menggunakan WSL, Docker dan VS Code, seperti screenshoot berikut:
+
+![konsumsi memory sampai 90% lebih](https://i.ibb.co/tB43yjJ/wsl-task-manager.png)
+
+Nah, jika masih menggunakan Hyper-V di Docker, terdapat setting untuk alokasi Memory dan CPU, tapi jika menggunakan WSL 2, lebih sedikit tricky ternyata, caranya dengan membuat file *.wslconfig* di dalem folder User , sebelumnya matikan dulu semua instance wsl (termasuk docker-desktop)
+```bash
+	wsl --shutdown
+```
+
+setelah itu buat file .wslconfig di dalam folder user, contoh: ***C:/Users/anjar/.wslconfig***, kemudian edit dengan notepad atau vscode, dan isi seperti berikut, silakan baca [dokumentasi WSL](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#wsl-2-settings) untuk konfigurasi lainnya, selain *memory* dan *processors*:
+```
+[wsl2]
+memory=4GB   # Limits VM memory in up to 4GB
+processors=3 # Makes the WSL 2 VM use 3 virtual processors
+```
+
+Save file tersebut, kemudian restart Docker Desktop, dan nyalakan wsl instance distro-nya kembali, kemudian run docker container kembali. Bisa di cek di Task Manager, setelah semua container nyala, konsumsi CPU & Memory tidak sampai 90%.
+
+![Setelah limit wsl](https://i.ibb.co/R4VG5RN/wsl-dsetting.png)

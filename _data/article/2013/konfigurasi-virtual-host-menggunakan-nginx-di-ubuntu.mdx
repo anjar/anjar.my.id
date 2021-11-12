@@ -1,0 +1,126 @@
+---
+title: Konfigurasi Virtual Host menggunakan NginX di Ubuntu
+publishDate: 2013-03-02T11:51:29.070Z
+category: Server
+tags:
+- virtual host
+
+---
+
+Melanjutkan dari posting saya yang sebelumnya "[Install NginX di Ubuntu Linux 12.04](dsadsad)", kali ini saya akan membahasa bagaimana konfigurasi virtual host di server NginX pada Ubuntu server 12.04, untuk cara melakukan instalasi NginX di ubuntu server dapat melihat posting saya [sebelumnya](ggw)
+
+Pastikan NginX PHP-FPM sudah berjalan di server, untuk konfigurasi virtual host di NginX hampir sama dengan konfigurasi di server Apache, yang berbeda adalah karena di NginX tidak ada htaccess, jadi untu konfigurasi htaccess dikonfugirasi di virtual host masing-masing atau dapat juga di file nginx.conf.
+
+Kali ini kita akan mencoba membuat 2 virutal host yaitu untuk domain-gue.com dan company-gue.com. Pertama copy file default nginx /etc/nignx/sites-available/default:
+
+```bash
+sudo cp /etc/nignx/sites-available/default /etc/nignx/sites-available/myblog
+``` 
+Kemudian rubah isi file myblog menjadi kira-kira seperti berikut:
+
+```bash
+sudo nano /etc/nignx/sites-available/myblog
+```
+```bash
+server {
+	# Redirect yoursite.com to www.yoursite.com
+	server_name domain-gue.com;
+	rewrite ^(.*) http://www.domain-gue.com$1 permanent;
+}
+
+server {
+
+	listen 80;  ## listen for ipv4; this line is default and implied
+	# listen [::]:80 default ipv6only=on; ## listen for ipv6
+
+	server_name www.domain-gue.com;
+	root /home/www/anjar/home;
+	index index.html index.htm index.php;
+
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+
+	# redirect server error pages to the static page /50x.html
+	error_page 500 502 503 504 /50x.html;
+	location = /50x.html {
+		root /usr/share/nginx/www;
+	}
+
+	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+	location ~  \.php$ {
+		# With php5-cgi alone:
+		fastcgi_pass 127.0.0.1:9000;
+
+		# With php5-fpm:
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
+
+	# deny access to .htaccess files, if Apache's document root
+	location ~ /\.ht {
+		deny all;
+	}
+}
+```
+kemudian copy kembali file myblog
+
+```bash
+sudo cp /etc/nignx/sites-available/myblog /etc/nignx/sites-available/mycompany
+sudo nano /etc/nignx/sites-available/mycompany
+```
+kemudian tambahkan:
+```bash
+server {
+	# Redirect yoursite.com to www.yoursite.com
+	server_name company-gue.com;
+	rewrite ^(.*) http://www.company-gue.com$1 permanent;
+}
+
+server {
+	listen 80;  ## listen for ipv4; this line is default and implied
+
+	server_name www.company-gue.com;
+	root /home/www/anjar/company;
+	index index.html index.htm index.php;
+
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+
+	# redirect server error pages to the static page /50x.html
+	error_page 500 502 503 504 /50x.html;
+	location = /50x.html {
+		root /usr/share/nginx/www;
+	}
+
+	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+	location ~  \.php$ {
+		# # With php5-cgi alone:
+		fastcgi_pass 127.0.0.1:9000;
+
+		# # With php5-fpm:
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
+
+	# deny access to .htaccess files, if Apache's document root
+	location ~ /\.ht {
+		deny all;
+	}
+}
+```
+Kemudian buat symlink untuk kedua file tersebut di direktori sites-enabled
+
+```bash
+sudo ln -s /etc/nignx/sites-available/myblog /etc/nignx/sites-enabled/myblog<br />
+sudo ln -s /etc/nignx/sites-available/mycompany /etc/nignx/sites-enabled/mycompany
+```
+Kemudian restart nginx server
+
+```bash
+sudo service nginx restart
+```
+
+Perhatikan pesan yang muncul, jika konfigurasi sudah benar dan sesuai maka tidak ada warning atau error.
+Semoga berguna :p

@@ -1,0 +1,62 @@
+---
+title: Mencoba Bahasa Pemograman Hack Milik Facebook
+publishDate: 2014-12-25T13:30:29.070Z
+category: Programming
+tags:
+- hacklang
+---
+
+
+### HACKLANG
+
+ **Hack** adalah salah satu bahasa pemrograman yang dikembangkan oleh Facebook untuk dapat berjalan diatas virtual machine buatan mereka, yaitu ***HipHop Virtual Mchine*** atau disingkat (**HHVM**). Menurut hacklang.org, **Hack** dapat berjalan mulus dengan PHP. **Hack** membuat siklus pengembangan PHP yang lebih cepat dengan menambahkan banyak fitur yang umum ditemukan dalam bahasa pemograman modern.
+
+Facebook juga merilis versi open source dari **Hack** untuk umum sebagai bagian dari platform runtime ***HHVM***, yang sekarang akan mendukung Hack dan PHP. untuk info lebih lanjutnya mengenai hack bisa kamu coba di [http://hacklang.org](http://hacklang.org) Nah, kali ini kita akan mencoba membuat hello world dengan **HackLang**.
+
+#### Install HHVM
+ Untuk membuat aplikasi dengan Hack tentunya harus sudah terinstall **HHVM** di mesin kita, hack sudah tersedia otomatis jika kita menginstall **HHVM** versi 3 keatas.
+
+#### Hello World Hack
+Jika **HHVM** sudah terinstall, selanjutnya kita akan mencoba membuat hello world dengan HackLang. Pertama coba buat satu folder baru misal dengan nama "hacklang"
+
+```bash
+cd /var/www/html
+mkdir hacklang
+```
+Didalam folder hacklang kita akan membuat satu file dengan nama ***halo.php*** (hack dapat membaca file extensi php), perbedaan mendasar antara php dan hack adalah, kita dapat menyisipkan skrip PHP di dalam tag HTML, sedangkan di Hack kita tidak bisa melakukannya. misal kita isi file ***halo.php*** seperti ini
+  
+```php
+<html>
+	<head>
+		<title>HHVM pake PHP</title>
+	</head>
+	<body>
+		<p>
+			<?php echo '<h1>Hello World</h1>' ;?>
+		</p>
+	</body>
+</html>
+```
+
+
+Ketika skrip tersebut di running akan menggunakan CLI atau via Web maka hanya kan tampil "Hello World" dengan Tag H1, nah di Hacklang kita tidak dapat seperti itu,  karna hacklang tidak dapat berjalan dengan html. misal tag "```<?php```" kita rubah dengan menggunakan tag "```<?hh```", ketika di running maka akan menampilkan blank page, atau error
+
+```php  
+Fatal error: syntax error, unexpected T_HH_ERROR, expecting $end in /var/www/html/hacklang/halo.php on line 1
+```
+ Agar berjalan di Hack kita harus memisahkan tag HTML dan skrip hack, cth :
+
+```
+<?hh
+echo '<h1>Halo Dunia</h1>';
+```
+
+Di Hack tidak ada "```?>``" atau close tag seperti yang bisa digunakan di PHP, maka dari itu Hack tidak dapat berjalan bersamaan dengan HTML. Sebelum running skrip tersebut, buat satu file kosong dengan nama "**.hhconfig**" didalam folder hacklang, kemudian jalankan :
+
+```bash
+hh_client
+```
+
+Perintah tersebut akan mengecek apakah ada skrip yang error, jika error, perhatikan pesannya dan perbaiki, jika tidak ada error dapat kita eksekusi dengan perintah "hhvm halo.php" atau bisa dibuka menggunakan browser, maka akan keluar seperti berikut :
+
+Untuk menggabungkan antara Hacklang dan HTML kita dapat menggunakan XHP, untuk lebih jelas mengenai XHP dapat dibaca di [https://github.com/facebook/xhp](https://github.com/facebook/xhp)
