@@ -1,0 +1,16 @@
+{
+  "eslint.enable": true,
+  "javascript.preferences.quoteStyle": "double",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": false,
+  "editor.autoIndent": "full",
+  "editor.wrappingIndent": "indent",
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  }
+}

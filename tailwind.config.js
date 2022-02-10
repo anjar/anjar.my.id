@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 module.exports = {
   darkMode: 'class',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './layout/**/*.{js,ts,jsx,tsx}'],
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './layout/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontFamily: {
       sans: ['IBM Plex Sans', 'sans-serif'],
@@ -127,7 +127,6 @@ module.exports = {
 
   },
   plugins: [
-    require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
   ],
   variants: {

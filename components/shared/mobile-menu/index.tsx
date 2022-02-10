@@ -11,7 +11,7 @@ import {
 interface Props extends HTMLAttributes<HTMLElement> {
   handleClick: () => void;
 }
-const HamburgerMenu = ({ handleClick }:Props) => (
+const HamburgerMenu = ({ handleClick }: Props) => (
   <>
 
     <div className="-mx-3 pl-3 pr-1 pb-2 flex items-center justify-between border-b border-blue-900">
@@ -80,14 +80,12 @@ const HamburgerMenu = ({ handleClick }:Props) => (
               <FontAwesomeIcon icon={faBriefcase} size="lg" />
             </div>
             <div className="col-span-3">
-              Project
+              Work
             </div>
           </div>
         </a>
       </Link>
-
     </nav>
-
   </>
 );
 

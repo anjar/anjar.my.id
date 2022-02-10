@@ -18,19 +18,17 @@
     "@fortawesome/free-regular-svg-icons": "^6.0.0-beta2",
     "@fortawesome/free-solid-svg-icons": "^6.0.0-beta2",
     "@fortawesome/react-fontawesome": "^0.1.15",
-    "@tailwindcss/typography": "^0.4.1",
-    "@types/lodash": "^4.14.172",
-    "@types/react-syntax-highlighter": "^13.5.2",
+    "@tailwindcss/typography": "^0.5.1",
     "autoprefixer": "^10.3.1",
     "clsx": "^1.1.1",
     "contentlayer": "latest",
+    "graphql": "^16.3.0",
     "graphql-request": "^3.5.0",
     "lodash": "^4.17.21",
     "next": "^12.0.10",
     "next-contentlayer": "latest",
     "next-themes": "^0.0.15",
     "postcss": "^8.3.6",
-    "prismjs": "^1.25.0",
     "react": "^17.0.2",
     "react-dom": "17.0.2",
     "react-gtm-module": "^2.0.11",
@@ -47,7 +45,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
+    "@types/lodash": "^4.14.172",
     "@types/react": "17.0.20",
+    "@types/react-syntax-highlighter": "^13.5.2",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^1.13.2",
@@ -64,8 +64,8 @@
     "jest": "^27.5.1",
     "lint-staged": "^12.3.3",
     "next-sitemap": "^1.6.168",
-    "tailwindcss": "^2.2.7",
-    "typescript": "4.4.4"
+    "tailwindcss": "^3.0.19",
+    "typescript": "^4.5.5"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

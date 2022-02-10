@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 
-const LatestProject:FunctionComponent = () => {
+const LatestProject: FunctionComponent = () => {
   const query = gql`
       {
         viewer {
@@ -55,7 +55,7 @@ const LatestProject:FunctionComponent = () => {
     <ul className="flex flex-col md:flex-row flex-wrap gap-3">
       {project.map(({
         name, description, url, homepageUrl,
-      } : ProjectType, idx: number) => {
+      }: ProjectType, idx: number) => {
         const colsLink = homepageUrl ? 'grid-cols-2' : 'grid-cols-1';
         return (
           <li key={`posts_${idx.toString()}`} className="border-gray-400 flex flex-col md:flex-row mb-2">
@@ -65,7 +65,7 @@ const LatestProject:FunctionComponent = () => {
                 <div className="text-gray-600 text-sm"><a href={url} target="_blank" rel="noreferrer">{description}</a></div>
               </div>
               <div className={`grid ${colsLink} text-gray-600 gap-2 text-xs`}>
-                { homepageUrl && (
+                {homepageUrl && (
                   <a href={homepageUrl} target="_blank" rel="nofollow noreferrer">
                     <FontAwesomeIcon icon={faLink} fontSize="1.5rem" className="hover:text-gray-300 dark:hover:text-gray-900" />
                   </a>
