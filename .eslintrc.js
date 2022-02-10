@@ -7,12 +7,11 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
-    'next',
-    'next/core-web-vitals',
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-
+    'next',
+    'next/core-web-vitals',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -70,7 +69,7 @@ module.exports = {
   overrides: [
     {
       // enable the rule specifically for TypeScript files
-      files: ['*.ts', '*,mjs', '*,tsx'],
+      files: ['*.ts', '*.mjs', '*,tsx'],
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': ['error'],
       },

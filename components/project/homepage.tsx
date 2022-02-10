@@ -62,7 +62,7 @@ const LatestProject:FunctionComponent = () => {
             <div className="select-none cursor-pointer bg-gray-100 dark:bg-gray-800 rounded-md flex flex-1 items-center p-4  transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
               <div className="flex-1 pl-1 mr-16">
                 <div className="font-medium">{name}</div>
-                <div className="text-gray-600 text-sm"><a href="asdsd" target="_blank">{description}</a></div>
+                <div className="text-gray-600 text-sm"><a href={url} target="_blank" rel="noreferrer">{description}</a></div>
               </div>
               <div className={`grid ${colsLink} text-gray-600 gap-2 text-xs`}>
                 { homepageUrl && (
