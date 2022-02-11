@@ -24,61 +24,57 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
   }
 
   return (
-    <>
-      <article className="recipe-article">
-        <header>
-          <h1 className="mb1 px3">{article.title}</h1>
+    <article className="recipe-article">
+      <header>
+        <h1 className="mb1 px3">{article.title}</h1>
 
-          <address className="ampstart-byline clearfix mb4 px3 h5">
-            <time
-              className="ampstart-byline-pubdate block bold my1"
-              dateTime={dateString}
-            >
-              {dateString}
-            </time>
-          </address>
-          {(article?.image)
+        <address className="ampstart-byline clearfix mb4 px3 h5">
+          <time
+            className="ampstart-byline-pubdate block bold my1"
+            dateTime={dateString}
+          >
+            {dateString}
+          </time>
+        </address>
+        {(article?.image)
             && (
-              <>
-                <amp-img
-                  src={imgSrc}
-                  width="800"
-                  height="453"
-                  layout="responsive"
-                  alt={article.title}
-                  className="mb4 mx3"
-                />
-              </>
+              <amp-img
+                src={imgSrc}
+                width="800"
+                height="453"
+                layout="responsive"
+                alt={article.title}
+                className="mb4 mx3"
+              />
             )}
 
-        </header>
-        <ReactMarkdown
-          className="prose dark:prose-dark md:prose-lg"
-          remarkPlugins={[gfm]}
-          children={article?.body.raw}
-          components={{
-            code({
-              inline, className, children, ...props
-            }) {
-              const match = /language-(\w+)/.exec(className || '');
-              return !inline && match ? (
-                <SyntaxHighlighter
-                  children={String(children).replace(/\n$/, '')}
-                  style={vscDarkPlus}
-                  language={match[1]}
-                  PreTag="div"
-                />
-              ) : (
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              );
-            },
-          }}
-        />
+      </header>
+      <ReactMarkdown
+        className="prose dark:prose-dark md:prose-lg"
+        remarkPlugins={[gfm]}
+        children={article?.body.raw}
+        components={{
+          code({
+            inline, className, children, ...props
+          }) {
+            const match = /language-(\w+)/.exec(className || '');
+            return !inline && match ? (
+              <SyntaxHighlighter
+                children={String(children).replace(/\n$/, '')}
+                style={vscDarkPlus}
+                language={match[1]}
+                PreTag="div"
+              />
+            ) : (
+              <code className={className} {...props}>
+                {children}
+              </code>
+            );
+          },
+        }}
+      />
 
-      </article>
-    </>
+    </article>
   );
 };
 export default DetailArticleContent;

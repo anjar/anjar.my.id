@@ -10,7 +10,7 @@ config.autoAddCss = false;
 
 const gtmID = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-XXXXXXX';
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {
     TagManager.initialize({ gtmId: gtmID });
   }, []);
@@ -19,5 +19,5 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
       <Component {...pageProps} />
     </ThemeProvider>
   );
-};
+}
 export default MyApp;

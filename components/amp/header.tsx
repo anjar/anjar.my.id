@@ -1,5 +1,5 @@
-const Header = () => (
-  <>
+function Header() {
+  return (
     <header
       className="ampstart-headerbar fixed flex justify-start items-center top-0 left-0 right-0 pl2 pr4"
     >
@@ -13,7 +13,7 @@ const Header = () => (
       </div>
       Anjar
     </header>
-  </>
-);
+  );
+}
 
 export default Header;

@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLClient } from 'graphql-request';
 import { RequestDocument } from 'graphql-request/dist/types';
 
 const gqlEnpoint = process.env.NEXT_PUBLIC_GITHUB_GQL || 'https://api.github.com/graphql';
 const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN || '';
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const adminSecret = process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET || '';
 
 type mutateProps = {

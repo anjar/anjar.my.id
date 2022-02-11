@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import HamburgerMenu from 'components/shared/mobile-menu';
 import useClickAway from 'hooks/click-away';
 
-const HamburgerButton = () => {
+function HamburgerButton() {
   const [isOpen, setIsOpen] = useState(false);
   const genericHamburgerLine = 'h-0.5 w-5 my-0.5 rounded-full bg-gray-700 transition ease transform duration-300';
 
@@ -45,6 +45,6 @@ const HamburgerButton = () => {
 
     </div>
   );
-};
+}
 
 export default HamburgerButton;

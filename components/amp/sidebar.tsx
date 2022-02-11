@@ -1,42 +1,41 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { getSiteMetaData } from 'lib/site-config';
 
-const AmpMenubar = () => {
+function AmpMenubar() {
   const siteConfig = getSiteMetaData();
   return (
-    <>
-      <amp-sidebar
-        id="header-sidebar"
-        className="ampstart-sidebar px3"
-        layout="nodisplay"
-      >
-        <div className="flex justify-start items-center ampstart-sidebar-header">
-          <div
-            role="button"
-            aria-label="close sidebar"
-            className="ampstart-navbar-trigger items-start"
-          >
-            ✕
-          </div>
-        </div>
-        <nav className="ampstart-sidebar-nav ampstart-nav">
-          <ul className="list-reset m0 p0 ampstart-label">
-            <li className="ampstart-nav-item">
-              <a className="ampstart-nav-link" href="/">Beranda</a>
-            </li>
-            <li className="ampstart-nav-item">
-              <a className="ampstart-nav-link" href="/article">Article</a>
-            </li>
-            <li className="ampstart-nav-item">
-              <a className="ampstart-nav-link" href="/work">Work</a>
-            </li>
-          </ul>
-        </nav>
-
-        <ul
-          className="ampstart-social-follow list-reset flex justify-around items-center flex-wrap m0 mb4"
+    <amp-sidebar
+      id="header-sidebar"
+      className="ampstart-sidebar px3"
+      layout="nodisplay"
+    >
+      <div className="flex justify-start items-center ampstart-sidebar-header">
+        <div
+          role="button"
+          aria-label="close sidebar"
+          className="ampstart-navbar-trigger items-start"
         >
-          {siteConfig?.social?.twitter && (
+          ✕
+        </div>
+      </div>
+      <nav className="ampstart-sidebar-nav ampstart-nav">
+        <ul className="list-reset m0 p0 ampstart-label">
+          <li className="ampstart-nav-item">
+            <a className="ampstart-nav-link" href="/">Beranda</a>
+          </li>
+          <li className="ampstart-nav-item">
+            <a className="ampstart-nav-link" href="/article">Article</a>
+          </li>
+          <li className="ampstart-nav-item">
+            <a className="ampstart-nav-link" href="/work">Work</a>
+          </li>
+        </ul>
+      </nav>
+
+      <ul
+        className="ampstart-social-follow list-reset flex justify-around items-center flex-wrap m0 mb4"
+      >
+        {siteConfig?.social?.twitter && (
           <li>
             <a
               href={`https://www.twitter.com/${siteConfig?.social?.twitter}`}
@@ -60,9 +59,9 @@ const AmpMenubar = () => {
 
             </a>
           </li>
-          )}
+        )}
 
-          {siteConfig?.social?.facebook
+        {siteConfig?.social?.facebook
             && (
             <li>
               <a
@@ -88,7 +87,7 @@ const AmpMenubar = () => {
             </li>
             )}
 
-          {siteConfig?.social?.instagram && (
+        {siteConfig?.social?.instagram && (
           <li>
             <a
               href={`https://www.instagram.com/${siteConfig?.social?.instagram}`}
@@ -113,12 +112,11 @@ const AmpMenubar = () => {
 
             </a>
           </li>
-          )}
+        )}
 
-        </ul>
-      </amp-sidebar>
-    </>
+      </ul>
+    </amp-sidebar>
   );
-};
+}
 
 export default AmpMenubar;
