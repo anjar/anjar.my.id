@@ -11,9 +11,9 @@ const nextConfig = {
   images: {
     domains: ['sxmnidvxxuvndbbtuwnr.supabase.co'],
   },
-  eslint: {
-    dirs: ['pages', 'components', 'hooks', 'lib', 'types']
-  },
+  // eslint: {
+  //   dirs: ['pages', 'components', 'hooks', 'lib', 'types']
+  // },
   // typescript: {
   //   // !! WARN !!
   //   // Dangerously allow production builds to successfully complete even if

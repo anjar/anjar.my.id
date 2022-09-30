@@ -1,9 +1,10 @@
 /* eslint-disable react/no-children-prop */
 import { FunctionComponent } from 'react';
 import ReactMarkdown from 'react-markdown';
+import slugify from "slugify";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import Image from 'next/image';
+import Image from 'next/future/image';
 // import Link from 'next/link';
 import { useRouter } from 'next/router';
 import gfm from 'remark-gfm';
@@ -14,6 +15,7 @@ import {
 } from 'react-share';
 import type { ArticleApi } from 'types';
 import { getSiteMetaData } from 'lib/site-config';
+import Link from 'next/link';
 // import MDXComponents from 'components/mdx';
 
 type Props = {
@@ -35,6 +37,7 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
   if (article?.image) {
     imgSrc = article?.image || '';
   }
+  const css = { maxWidth: '100%', height: 'auto' }
 
   return (
     <article>
@@ -95,7 +98,27 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
           <div className="md:flex-shrink-0">
             <div>
               <h1 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-5xl dark:text-white leading-none">{article?.title}</h1>
-              <div className="flex justify-between text-md text-gray-500">
+              
+            </div>
+
+            <div className="relative block">
+              {(article?.image)
+                 && (
+                   <>
+                     <figcaption className="absolute rounded-sm text-lg py-0 mt-4 text-white px-4 ml-4 z-10 bg-indigo-500">
+                       <Link href={`/category/${slugify(article.category, {lower: true})}`}>
+                         <a className="text-xxs inline-block align-middle">
+                           {article.category}
+                         </a>
+                       </Link>
+                     </figcaption>
+                     <div>
+                       <Image src={imgSrc} width="650" height="350" style={css}  alt={article.title} />
+                     </div>
+                   </>
+                 )}
+            </div>
+            <div className="flex justify-between text-md text-gray-500">
                 <div>
                   {dateString}
                   {' '}
@@ -116,28 +139,8 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
                   </span>
                 </div>
               </div>
-            </div>
-
-            <div className="relative block">
-              {(article?.image)
-                 && (
-                   <>
-                     {/* <figcaption className="absolute rounded-sm text-lg py-0 mt-4 text-white px-4 ml-4 z-10 bg-indigo-500">
-                       <Link href={`/category/${article.category}`}>
-                         <a className="text-xxs inline-block align-middle">
-                           {article.category}
-                         </a>
-                       </Link>
-                     </figcaption> */}
-                     <div>
-                       <Image src={imgSrc} width="650" height="350" alt={article.title} />
-                     </div>
-                   </>
-
-                 )}
-            </div>
           </div>
-          <div className="break-words ">
+          <div className="break-words  mt-4 ">
             {/* <MDXContent
                 components={
                   {
