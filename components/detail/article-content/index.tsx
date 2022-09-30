@@ -140,7 +140,7 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
                 </div>
               </div>
           </div>
-          <div className="break-words  mt-4 ">
+          <div className="break-words mt-4 ">
             {/* <MDXContent
                 components={
                   {
@@ -149,7 +149,7 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
                 }
               /> */}
             <ReactMarkdown
-              className="prose dark:prose-dark md:prose-lg"
+              className="prose dark:prose-dark lg:prose-lg"
               remarkPlugins={[gfm]}
               children={article?.body.raw}
               components={{

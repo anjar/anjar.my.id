@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { gql } from 'graphql-request';
 import type { ProjectType } from 'types';
-import useSWRImmutable from 'swr/immutable';
+import useSwr from 'swr';
 import fetcher from 'lib/github-fetcher';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -27,7 +27,7 @@ const LatestProject: FunctionComponent = () => {
       }
       `;
 
-  const { data, error } = useSWRImmutable(query, fetcher);
+  const { data, error } = useSwr(query, fetcher);
 
   if (error) return <div>failed to load</div>;
   if (!data) {

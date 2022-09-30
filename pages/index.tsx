@@ -40,8 +40,7 @@ const Home: NextPage<Props> = ({ posts }: Props) => (
 
       <h3 className="mb-4">
         <Link href="/article">
-          <a className="text-2xl font-bold">
-
+          <a className="text-2xl font-bold hover:text-sky-800">
             My Latest Posts
           </a>
         </Link>
@@ -55,8 +54,8 @@ const Home: NextPage<Props> = ({ posts }: Props) => (
 
     <section className="mt-6 mb-6">
       <h3 className="mb-4">
-        <Link href="/article">
-          <a className="text-2xl font-bold">
+        <Link href="/work">
+          <a className="text-2xl font-bold hover:text-sky-800">
             My Latest Work
           </a>
         </Link>
