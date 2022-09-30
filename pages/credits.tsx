@@ -48,7 +48,7 @@ const Credits: NextPage<Props> = ({ posts }: Props) => (
       </h3>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-			<a href="https://www.freepik.com/free-vector/electronic-document-electronic-paper-paperless-office-internet-article-online-documentation-organization-typing-text-file-computer-vector-isolated-concept-metaphor-illustration_12083320.htm#query=article&position=1&from_view=search">Image by vectorjuice</a> on Freepik
+			  Notebook : Image by <a href="https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=308615">Clker-Free-Vector-Images</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=308615">Pixabay</a>
       </div>
 
     </section>
