@@ -19,6 +19,6 @@
       "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx",".contentlayer/generated"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx",".contentlayer/generated"]
 }
