@@ -9,8 +9,7 @@ import ArticleHomepage from 'components/article/homepage';
 import LatestProject from 'components/project/homepage';
 import MetaTag from 'components/shared/meta-tag';
 
-import type { Article } from '.contentlayer/types';
-import { allArticles } from '.contentlayer/data';
+import { allArticles, DocumentTypes } from 'contentlayer/generated';
 
 export const getStaticProps = async () => {
   const sortedPosts = allArticles.sort(
@@ -22,7 +21,7 @@ export const getStaticProps = async () => {
 };
 
 type Props = {
-  posts: Article[]
+  posts: DocumentTypes[]
 }
 const Home: NextPage<Props> = ({ posts }: Props) => (
   <BaseLayout>

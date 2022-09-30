@@ -4,7 +4,8 @@ import ArticleContent from 'components/detail/article-content';
 import type { ArticleApi } from 'types';
 import MetaTag from 'components/shared/meta-tag';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { allArticles } from '.contentlayer/data';
+import { allArticles } from 'contentlayer/generated';
+
 
 // const gqlEnpoint = process.env.NEXT_PUBLIC_GQL_ENDPOINT || 'https://gql.anjar.fun/v1/graphql';
 
