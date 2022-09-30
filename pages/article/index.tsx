@@ -5,8 +5,8 @@ import { pick } from 'contentlayer/utils';
 import BaseLayout from 'layout/base';
 import ArticleList from 'components/article/list';
 import MetaTag from 'components/shared/meta-tag';
-import { allArticles } from '.contentlayer/data';
-import type { Article } from '.contentlayer/types';
+
+import { allArticles, DocumentTypes } from 'contentlayer/generated';
 
 export const getStaticProps = async () => {
   const sortedPosts = allArticles.sort(
@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
   return { props: { posts } };
 };
 type Props = {
-  posts: Article[];
+  posts: DocumentTypes[];
 }
 const Article: NextPage<Props> = ({ posts }: Props) => (
   <BaseLayout>
