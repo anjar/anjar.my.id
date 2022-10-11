@@ -1,0 +1,83 @@
+---
+title:  "Install Oh-My-Posh di dalam Ubuntu WSL"
+publishDate: 2022-09-12T12:43:29.070Z
+category: Programming
+tags : [WSL, Windows, OhMyPosh]
+
+---
+
+Mungkin kita suka ngerasa bosen dengan tampilan default dari terminal/console yang biasanya hanya 2-3 komposisi warna, dengan background hitam, font berwarna hijau atau kuning. Nah setelah sebelumnya saya sudah mencoba [install Oh My Posh di Powershell][ohmyposh-powershell-post].
+
+![Default Ubuntu Terminal](https://i.postimg.cc/T1vGXsRm/Screenshot-2022-10-11-140325.png)
+
+Kali ini saya mau mencoba instalasi di salah satu distro linux ubuntu dalam WSL. sebelumnya silahkan coba install distro baru terlebih dahulu, atau bisa langsung mencoba langkah berikut:
+
+## 1. Install Oh My Posh via Script
+
+Langkah pertama lakukan instalasi [**Oh My Posh**][ohmyposh], kalau baca dari webnya, ada 2 cara untuk instalasi Oh My Posh, yang pertama via brew dan yang kedua via script, karna saya baru install distro baru, jadi saya akan mencoba via script. Run script berikut dalam terminal wsl kamu:
+
+```
+sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
+sudo chmod +x /usr/local/bin/oh-my-posh
+```
+
+Tunggu beberapa saat, kemudian install Oh My Posh Theme:
+
+## 2. Install Oh My Posh Theme
+
+Ada beberapa tema yang di sediakan oleh Oh My Posh, untuk detil dari tema-tema yang tersedia, bisa di lihat di link [ini][ohmyposh-theme]. pertama bua 1 directory dulu untuk mendownload themes yang tersedia dari github.
+
+```
+mkdir ~/.ohmyposh-theme
+```
+
+Kemudian, unduh themes yang tersedia, bisa menggunakan wget, curl dan lainnya, kemudian ekstract file zip tersebut kedalam folder yang baru saja dibuat :
+
+```
+wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O ~/.ohmyposh-theme/themes.zip
+unzip ~/.ohmyposh-theme/themes.zip -d ~/.ohmyposh-theme
+```
+
+setelah itu berikan akses untuk semua file
+
+```
+chmod u+rw ~/.ohmyposh-theme/*.omp.*
+rm ~/.ohmyposh-theme/themes.zip
+```
+
+
+## 3. Install Nerd Font
+
+Oh My Posh sendiri merekomendasi menggunakan [Nerd Fonts][nerd-font], run script berikut untuk install NerdFont, dan pilih jenis font yang akan digunakan, saya sendiri menggunakan *CascadiaCove*. Karna kita menggunakan WSL, jangan lupa untuk install Nerd Font yang akan digunakan di Windows juga.
+
+```
+oh-my-posh font install
+```
+
+setelah itu jangan lupa untuk mengubah default font pada Powershell
+![Ubah Font Face](https://i.postimg.cc/MKqpQkqF/Screenshot-2022-10-11-133938.png)
+
+## 4. Konfigurasi Terminal
+
+Langkah selanjutnya konfigurasi terminal agar menggunakan Oh My Posh. saya sendiri masih menggunakan default ubuntu terminal yaitu ``bash`` maka tambahkan code berikut di dalam ``~/.profile`` . Karna saya menggunakan windows, dan juga menggunakan Oh My Posh di Powershell saya, maka saya menggunakan 1 file tema yang sama
+
+```
+eval "$(oh-my-posh init bash)"
+eval "$(oh-my-posh --init --shell bash --config /mnt/c/Users/Anjar\ Febrianto/clean-detailed.omp.json)"
+```
+
+kemudian run script berikut untuk mereload terminal :
+
+```
+. ~/.profile
+```
+
+Berikut contoh tampilan dari terminal wsl saya:
+
+![WSl dengan Oh My Posh](https://i.postimg.cc/V6Scx8nD/Screenshot-2022-10-11-143610.png)
+
+
+[ohmyposh]:https://ohmyposh.dev/
+[ohmyposh-theme]:https://ohmyposh.dev/docs/themes
+[nerd-font]:https://www.nerdfonts.com/
+[ohmyposh-powershell-post]:/article/install-oh-my-post-di-powershell

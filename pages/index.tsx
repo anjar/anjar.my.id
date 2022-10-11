@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
     (a, b) => Number(new Date(b.publishDate)) - Number(new Date(a.publishDate)),
   );
   const latest = sortedPosts.slice(0, 3);
-  const posts = latest.map((post) => pick(post, ['slug', 'title', 'publishDate']));
+  const posts = latest.map((post) => pick(post, ['slug', 'title', 'image', 'publishDate']));
   return { props: { posts } };
 };
 

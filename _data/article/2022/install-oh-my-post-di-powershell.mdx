@@ -1,0 +1,69 @@
+---
+title:  "Install Oh-My-Posh di Powershell Windows"
+publishDate: 2022-09-12T12:43:29.070Z
+category: Programming
+tags : [WSL, Windows, OhMyPosh]
+image: /images/articles/2022/powershell.png
+---
+
+Dikarenakan sudah adanya WSL di windows, jadi saya akan sering menggunakan **Powershell** untuk sehari-hari. karna saya merasa bosan dengan tampilan Powershell yang gitu-gitu aja, jadi saya coba-coba googling, dan akhirnya menemukan [**Oh My Posh**][ohmyposh].
+
+[**Oh My Posh**][ohmyposh] sendiri adalah sebuah library shell theme yang bisa di gunakan di multi platform (Windows, Mac, Linux dll). Setelah baca-baca dokumen-nya, saya mulai coba install di Windows.
+
+## 1. Install Oh My Posh via Windows store
+
+Kalau dari webnya sih ada beberapa cara untuk install [**Oh My Posh**][ohmyposh], salah satu dan yang paling mudah adalah install via [Mircosoft Store][window-store] klik link berikut:
+
+[https://ohmyposh.dev/docs/installation/windows#set-up-your-terminal][window-store]
+
+kemudian klik install dan tunggu proses instalasi Oh My Posh selesai.
+
+
+## 2. Install Nerd Font
+
+Karena saya menggunakan instalasi via Microsoft Store, maka otomatis akan terinstall Oh My Posh beserta tema yang ada. Langkah selanjutnya yaitu instalasi Nerd Font di Windows, buka 1 terminal sebagai administrator, kemudian run script berikut:
+
+```
+oh-my-posh font install
+```
+
+setelah itu jangan lupa untuk mengubah default font pada Powershell
+![Ubah Font Face](https://i.postimg.cc/50m0nvd8/Screenshot-2022-10-11-145549.png)
+
+## 4. Konfigurasi Terminal
+
+Langkah selanjutnya konfigurasi terminal agar menggunakan Oh My Posh, run script berikut untuk membuka via notepad:
+
+
+```
+notepad $PROFILE
+```
+
+kemudian tambahkan code berikut :
+
+```
+Set-PSReadlineOption -ViModeIndicator Script -ViModeChangeHandler {
+    Param($mode)
+    $Env:SHELL_VI_MODE = $mode
+    # go back to the beginning of the line
+    Write-Host -NoNewLine "`e[1000D"
+    # rewrite the prompt manually
+    write-Host -NoNewLine (oh-my-posh --shell pwsh --config ~/.jandedobbeleer.omp.json)
+}
+oh-my-posh --init --shell pwsh --config ~/clean-detailed.omp.json | Invoke-Expression
+```
+
+Kemudian reload powershell:
+```
+. $PROFILE
+```
+
+Berikut contoh tampilan dari Powershell saya:
+
+![Powershell dengan Oh My Posh](https://i.postimg.cc/KcH13G0v/Screenshot-2022-10-11-143850.png)
+
+
+[ohmyposh]:https://ohmyposh.dev/
+[ohmyposh-theme]:https://ohmyposh.dev/docs/themes
+[nerd-font]:https://www.nerdfonts.com/
+[window-store]:https://ohmyposh.dev/docs/installation/windows#set-up-your-terminal
