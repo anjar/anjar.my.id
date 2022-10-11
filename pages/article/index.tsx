@@ -55,10 +55,6 @@ const Article: NextPage<Props> = ({ posts, categories }: Props) => (
       </div>
     </div>
 
-    <section>
-    categories
-    </section>
-
     <section className="mt-6 mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
       <ArticleList posts={posts} />
     </section>

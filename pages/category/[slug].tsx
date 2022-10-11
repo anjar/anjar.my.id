@@ -56,7 +56,6 @@ interface Props {
   categories: Record<string, string>[];
 };
 const Article: NextPage<Props> = ({ posts, category, categories }: Props) => {
-  console.log("category",category)
   return (
   <BaseLayout>
     <MetaTag />

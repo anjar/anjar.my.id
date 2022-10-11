@@ -23,20 +23,20 @@ function Header() {
         <div className="hidden md:block md:col-span-5">
           <ul className="md:flex">
 
-            <li className="px-4 py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
+            <li className="py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
               <Link href="/">
-                <a className="">Home</a>
+                <a className="px-4">Home</a>
               </Link>
             </li>
 
-            <li className="px-4 py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
+            <li className="py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
               <Link href="/article">
-                <a className="tracking-widest leading-5">Article</a>
+                <a className="px-4  tracking-widest leading-5">Article</a>
               </Link>
             </li>
-            <li className="px-4 py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
+            <li className="py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
               <Link href="/">
-                <a className="tracking-widest leading-5">Work</a>
+                <a className="px-4 tracking-widest leading-5">Work</a>
               </Link>
             </li>
 
@@ -76,7 +76,7 @@ function Header() {
 
               {siteConfig?.social?.github
                   && (
-                  <a href={`https://www.github.com/${siteConfig?.social?.github}`} target="_blank" rel="nofollow noreferrer">
+                  <a href={`https://github.com/${siteConfig?.social?.github}`} target="_blank" rel="nofollow noreferrer">
                     <FontAwesomeIcon icon={faGithub} fontSize="1.5rem" className="hover:text-gray-500 dark:hover:text-gray-800" />
                   </a>
                   )}

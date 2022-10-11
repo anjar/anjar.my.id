@@ -4,8 +4,15 @@ module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './layout/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontFamily: {
-      sans: ['IBM Plex Sans', 'sans-serif'],
-      serif: ['IBM Plex Sans', 'serif'],
+      sans: ['Roboto Condensed', 'sans-serif'],
+      serif: ['Roboto Condensed', 'serif'],
+    },
+    letterSpacing: {
+      '1': '0em',
+      '03': '0.003em',
+      '2': '0.025em',
+      '3': '0.05em',
+      '4': '0.1em',
     },
     fontSize: {
       xxs: '.563rem',
