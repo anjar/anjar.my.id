@@ -1,16 +1,13 @@
-/* eslint-disable import/no-unresolved */
 import type { NextPage } from "next";
 import Image from "next/image";
-import BaseLayout from "layout/base";
-import ArticleList from "components/article/list";
-import MetaTag from "components/shared/meta-tag";
 import slugify from "slugify";
 import pick from "lodash/pick";
-
-import { allArticles, DocumentTypes } from "contentlayer/generated";
 import Link from "next/link";
 import { Fragment } from "react";
-import { useRouter } from "next/router";
+
+import { allArticles, DocumentTypes } from "contentlayer/generated";
+import ArticleList from "components/article/list";
+import MetaTag from "components/shared/meta-tag";
 
 export const getStaticPaths = async () => {
   const categories = allArticles.map((p) => ({
@@ -57,7 +54,7 @@ interface Props {
 };
 const Article: NextPage<Props> = ({ posts, category, categories }: Props) => {
   return (
-  <BaseLayout>
+  <>
     <MetaTag />
     <div className="flex flex-col text-center ">
       <div>
@@ -83,7 +80,7 @@ const Article: NextPage<Props> = ({ posts, category, categories }: Props) => {
     <section className="mt-6 mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
       <ArticleList posts={posts} />
     </section>
-  </BaseLayout>
+  </>
 )};
 
 export default Article;

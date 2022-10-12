@@ -1,14 +1,13 @@
 import { Fragment } from "react";
+import Link from "next/link";
 import type { NextPage } from "next";
 import Image from "next/image";
-import BaseLayout from "layout/base";
-import ArticleList from "components/article/list";
-import MetaTag from "components/shared/meta-tag";
 import slugify from "slugify";
 import pick from "lodash/pick";
 
 import { allArticles, DocumentTypes } from "contentlayer/generated";
-import Link from "next/link";
+import ArticleList from "components/article/list";
+import MetaTag from "components/shared/meta-tag";
 
 export const getStaticProps = async () => {
   const sortedPosts = allArticles.sort(
@@ -30,7 +29,7 @@ interface Props {
   categories: Record<string, string>[];
 };
 const Article: NextPage<Props> = ({ posts, categories }: Props) => (
-  <BaseLayout>
+  <>
     <MetaTag />
     <div className="flex flex-col text-center ">
       <div >
@@ -58,7 +57,7 @@ const Article: NextPage<Props> = ({ posts, categories }: Props) => (
     <section className="mt-6 mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
       <ArticleList posts={posts} />
     </section>
-  </BaseLayout>
+  </>
 );
 
 export default Article;

@@ -7,7 +7,7 @@ import {
 import HamburgerButton from 'components/shared/hamburger-menu';
 import dynamic from 'next/dynamic';
 
-const DarkModeButton = dynamic(() => import('./dark-mode-button' /* webpackChunkName: "dark-mode-button" */), {
+const DarkModeButton = dynamic(() => import('./dark-mode-button'), {
   ssr: false,
 });
 
@@ -16,7 +16,7 @@ function Header() {
 
   return (
     <div className="w-full mb-2 md:mb-6 bg-gray-100 dark:bg-gray-600 sticky -top-px z-50 border-b border-gray-300 dark:border-gray-800">
-      <nav className="w-full md:max-w-screen-lg mx-auto grid grid-cols-7 py-3">
+      <nav className="w-full md:max-w-5xl mx-auto grid grid-cols-7 py-3">
         <div className="md:hidden col-span-5">
           <HamburgerButton />
         </div>
@@ -43,44 +43,7 @@ function Header() {
           </ul>
         </div>
         <div className="col-span-2 pr-2 md:px-1 ">
-
-          <div className="flex justify-end md:justify-between">
-            <div className="hidden md:grid md:grid-cols-5 gap-2">
-              {siteConfig?.social?.facebook
-                  && (
-                  <a href={`https://www.facebook.com/${siteConfig?.social?.facebook}`} target="_blank" rel="nofollow noreferrer">
-                    <FontAwesomeIcon icon={faFacebookSquare} fontSize="1.5rem" className="hover:text-gray-500 dark:hover:text-gray-800" />
-                  </a>
-                  )}
-
-              {siteConfig?.social?.twitter
-                  && (
-                  <a href={`https://www.twitter.com/${siteConfig?.social?.twitter}`} target="_blank" rel="nofollow noreferrer">
-                    <FontAwesomeIcon icon={faTwitter} fontSize="1.5rem" className="hover:text-gray-500 dark:hover:text-gray-800" />
-                  </a>
-                  )}
-
-              {siteConfig?.social?.instagram
-                  && (
-                  <a href={`https://www.instagram.com/${siteConfig?.social?.instagram}`} target="_blank" rel="nofollow noreferrer">
-                    <FontAwesomeIcon icon={faInstagram} fontSize="1.5rem" className="hover:text-gray-500 dark:hover:text-gray-800" />
-                  </a>
-                  )}
-
-              {siteConfig?.social?.linkedin
-                  && (
-                  <a href={`https://www.linkedin.com/in/${siteConfig?.social?.linkedin}`} target="_blank" rel="nofollow noreferrer">
-                    <FontAwesomeIcon icon={faLinkedinIn} fontSize="1.5rem" className="hover:text-gray-500 dark:hover:text-gray-800" />
-                  </a>
-                  )}
-
-              {siteConfig?.social?.github
-                  && (
-                  <a href={`https://github.com/${siteConfig?.social?.github}`} target="_blank" rel="nofollow noreferrer">
-                    <FontAwesomeIcon icon={faGithub} fontSize="1.5rem" className="hover:text-gray-500 dark:hover:text-gray-800" />
-                  </a>
-                  )}
-            </div>
+          <div className="flex justify-end">
             <div className="">
               <DarkModeButton />
             </div>

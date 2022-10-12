@@ -1,22 +1,18 @@
-/* eslint-disable react/no-children-prop */
 import { FunctionComponent } from 'react';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import slugify from "slugify";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import Image from 'next/future/image';
-// import Link from 'next/link';
 import { useRouter } from 'next/router';
 import gfm from 'remark-gfm';
-// import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import {
-  FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon, WhatsappShareButton, WhatsappIcon, EmailShareButton, EmailIcon,
+  FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon, WhatsappShareButton, WhatsappIcon,
 } from 'react-share';
 import type { ArticleApi } from 'types';
 import { getSiteMetaData } from 'lib/site-config';
-import Link from 'next/link';
-// import MDXComponents from 'components/mdx';
 
 type Props = {
   article: ArticleApi
@@ -41,13 +37,14 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
 
   return (
     <article>
-      <div className="grid grid-cols-1 md:grid-cols-8 gap-5">
-        <div className="col-span-6">
-          <div className="md:flex-shrink-0">
-            <div>
+       <div>
               <h1 className="mb-4 text-2xl font-bold tracking-tight text-black md:text-5xl dark:text-white leading-none">{article?.title}</h1>
               
             </div>
+      <div className="grid grid-cols-1 md:grid-cols-8 gap-5">
+        <div className="col-span-6">
+          <div className="md:flex-shrink-0">
+           
 
             <div className="relative block">
               {(article?.image)
@@ -92,15 +89,8 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
               </div>
           </div>
           <div className="break-words mt-4 ">
-            {/* <MDXContent
-                components={
-                  {
-                    ...MDXComponents,
-                  } as any
-                }
-              /> */}
             <ReactMarkdown
-              className="prose max-w-none prose-slate dark:prose-dark md:!text-lg -tracking-03 leading-7 md:leading-8"
+              className="prose max-w-none prose-slate dark:prose-dark  -tracking-03 leading-7 md:leading-8"
               remarkPlugins={[gfm]}
               children={article?.body.raw}
               components={{
@@ -161,14 +151,6 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
                   round
                 />
               </WhatsappShareButton>
-              <EmailShareButton
-                url={detailURL}
-              >
-                <EmailIcon
-                  size="2.2rem"
-                  round
-                />
-              </EmailShareButton>
 
             </div>
 

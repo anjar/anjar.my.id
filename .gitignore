@@ -42,3 +42,4 @@ tsconfig.tsbuildinfo
 .contentlayer
 .yarn/
 public/sitemap-*.xml
+.vscode/extensions.json

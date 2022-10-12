@@ -1,15 +1,11 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-// eslint-disable-next-line import/no-unresolved
-import { pick } from 'contentlayer/utils';
-
-import BaseLayout from 'layout/base';
-import ArticleHomepage from 'components/article/homepage';
-import LatestProject from 'components/project/homepage';
-import MetaTag from 'components/shared/meta-tag';
+import pick from 'lodash/pick';
 
 import { allArticles, DocumentTypes } from 'contentlayer/generated';
+import MetaTag from 'components/shared/meta-tag';
+
 
 export const getStaticProps = async () => {
   const sortedPosts = allArticles.sort(
@@ -24,7 +20,7 @@ type Props = {
   posts: DocumentTypes[]
 }
 const Credits: NextPage<Props> = ({ posts }: Props) => (
-  <BaseLayout>
+  <>
     <MetaTag title="Anjar Febrianto - Husband, Father, Programmer and ProGamer wannabe" />
     <div className="flex flex-col text-center ">
       <div>
@@ -53,7 +49,7 @@ const Credits: NextPage<Props> = ({ posts }: Props) => (
 
     </section>
 
-  </BaseLayout>
+  </>
 
 );
 

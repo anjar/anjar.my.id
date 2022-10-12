@@ -3,6 +3,9 @@ import { ThemeProvider } from 'next-themes';
 import TagManager from 'react-gtm-module';
 import { useEffect } from 'react';
 import { config } from '@fortawesome/fontawesome-svg-core';
+
+import Layout from 'layout/base';
+
 import 'styles/font-awesome.css';
 import 'tailwindcss/tailwind.css';
 
@@ -16,7 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
   return (
     <ThemeProvider attribute="class">
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }

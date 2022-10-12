@@ -12,7 +12,7 @@ const BaseLayout:FunctionComponent<Props> = ({ children } : Props) => (
   <>
 
     <Header />
-    <main className="max-w-screen-lg container mx-auto px-2 md:px-8 ">
+    <main className="max-w-4xl container mx-auto px-2 md:px-8 ">
       {children}
     </main>
     <Footer />
