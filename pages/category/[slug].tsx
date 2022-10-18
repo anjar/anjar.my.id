@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import slugify from "slugify";
 import pick from "lodash/pick";
@@ -22,10 +22,10 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const dataArticles = allArticles.filter((post) => {
     const postCategory = slugify(post.category, { lower: true });
-    return postCategory.toLowerCase() === params.slug.toLowerCase();
+    return postCategory.toLowerCase() === ((params?.slug || "") as string).toLowerCase();
   });
 
   const sortedPosts = dataArticles.sort(
@@ -42,7 +42,7 @@ export const getStaticProps = async ({ params }) => {
   const uniqueCategory = categories.filter(
     (v, i, a) => a.findIndex((v2) => v2.slug === v.slug) === i
   );
-  const category = uniqueCategory.find((post) => post.slug === params.slug);
+  const category = uniqueCategory.find((post) => post.slug === params?.slug);
 
   return { props: { posts, categories: uniqueCategory, category } };
 };

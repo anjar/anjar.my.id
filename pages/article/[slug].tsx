@@ -9,7 +9,7 @@ import { stripHtml, truncateString } from 'lib/text-helper';
 
 type Props = {
   article: ArticleApi;
-  metaDesc; string;
+  metaDesc: string;
 };
 
 
@@ -32,8 +32,8 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 });
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const article = allArticles.find((post) => post.slug === params.slug);
-  const cleanContent = stripHtml(article.body.html);
+  const article = allArticles.find((post) => post.slug === params?.slug);
+  const cleanContent = stripHtml(article?.body.html || "");
   const metaDesc = truncateString(cleanContent, 160, false);
  
   return {

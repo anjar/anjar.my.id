@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ReactNode } from 'react';
 
-function CustomLink({ children, href, ...rest }) {
+
+interface ImageProps {
+  href: string;
+  children: ReactNode;
+}
+
+const CustomLink = ({ children, href, ...rest }: ImageProps) => {
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
   if (isInternalLink) {
     return (
@@ -14,7 +21,11 @@ function CustomLink({ children, href, ...rest }) {
   return <a target="_blank" rel="noopener noreferrer" {...rest}>{children}</a>;
 }
 
-function RoundedImage({ alt, src, ...rest }) {
+interface ImageProps {
+  alt: string;
+  src: string;
+}
+const RoundedImage = ({ alt, src, ...rest }: ImageProps) => {
   return <Image src={src} alt={alt} className="rounded-lg" {...rest} />;
 }
 
