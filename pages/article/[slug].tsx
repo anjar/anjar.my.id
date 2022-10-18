@@ -5,14 +5,20 @@ import { allArticles } from 'contentlayer/generated';
 
 import MetaTag from 'components/shared/meta-tag';
 import ArticleContent from 'components/detail/article-content';
+import { stripHtml, truncateString } from 'lib/text-helper';
 
 type Props = {
-  article: ArticleApi
+  article: ArticleApi;
+  metaDesc; string;
 };
 
-const DetailArticle: NextPage<Props> = ({ article }: Props) => (
+
+
+
+
+const DetailArticle: NextPage<Props> = ({ article, metaDesc }: Props) => (
   <>
-    <MetaTag title={article.title} />
+    <MetaTag title={article.title} description={metaDesc} />
     <section className="container mx-auto mb-8">
       <ArticleContent article={article} />
     </section>
@@ -27,9 +33,11 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const article = allArticles.find((post) => post.slug === params.slug);
-
+  const cleanContent = stripHtml(article.body.html);
+  const metaDesc = truncateString(cleanContent, 160, false);
+ 
   return {
-    props: { article },
+    props: { article, metaDesc },
     revalidate: 60,
   };
 };

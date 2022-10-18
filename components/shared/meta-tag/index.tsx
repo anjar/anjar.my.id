@@ -21,15 +21,15 @@ const MetaTag:FunctionComponent<Props> = ({ title, description, canonicalUrl } :
     </title>
     <meta name="description" content={metaDesc} />
     {/* <meta name="keywords" content={keyword} /> */}
-    <meta name="title" content={title} />
+    <meta name="title" content={metaTitle} />
     <meta name="description" content={metaDesc} />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
     <meta property="og:type" content="website" />
-    <meta name="og:title" property="og:title" content={title} />
+    <meta name="og:title" property="og:title" content={metaTitle} />
     <meta name="og:description" property="og:description" content={metaDesc} />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={metaTitle} />
     <meta name="twitter:description" content={metaDesc} />
     <meta name="twitter:creator" content={siteMetadata.social.twitter} />
 
