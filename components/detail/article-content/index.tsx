@@ -61,8 +61,8 @@ const DetailArticleContent: FunctionComponent<Props> = ({ article }: Props) => {
                   href={`/category/${slugify(article.category, {
                     lower: true,
                   })}`}
-                >
-                  <a className="hover:underline">{article.category}</a>
+                  className="hover:underline">
+                  {article.category}
                 </Link>
               </div>
               <div>
@@ -77,10 +77,10 @@ const DetailArticleContent: FunctionComponent<Props> = ({ article }: Props) => {
                       href={`/category/${slugify(article.category, {
                         lower: true,
                       })}`}
-                    >
-                      <a className="text-xxs inline-block align-middle">
-                        {article.category}
-                      </a>
+                      className="text-xxs inline-block align-middle">
+
+                      {article.category}
+
                     </Link>
                   </figcaption>
                   <div className="mb-2">

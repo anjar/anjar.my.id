@@ -24,19 +24,19 @@ function Header() {
           <ul className="md:flex">
 
             <li className="py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
-              <Link href="/">
-                <a className="px-4">Home</a>
+              <Link href="/" className="px-4">
+                Home
               </Link>
             </li>
 
             <li className="py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
-              <Link href="/article">
-                <a className="px-4  tracking-widest leading-5">Article</a>
+              <Link href="/article" className="px-4  tracking-widest leading-5">
+                Article
               </Link>
             </li>
             <li className="py-1 transition-all duration-400 transform cursor-pointer rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800">
-              <Link href="/">
-                <a className="px-4 tracking-widest leading-5">Work</a>
+              <Link href="/" className="px-4 tracking-widest leading-5">
+                Work
               </Link>
             </li>
 

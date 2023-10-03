@@ -35,11 +35,11 @@ const Credits: NextPage<Props> = ({ posts }: Props) => (
     <section className="mt-6 mb-6">
 
       <h3 className="mb-4">
-        <Link href="/article">
-          <a className="text-2xl font-bold">
+        <Link href="/article" className="text-2xl font-bold">
+          
 
             Credits
-          </a>
+          
         </Link>
       </h3>
 

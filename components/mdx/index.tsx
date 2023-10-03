@@ -12,8 +12,8 @@ const CustomLink = ({ children, href, ...rest }: ImageProps) => {
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
   if (isInternalLink) {
     return (
-      <Link href={href}>
-        <a {...rest}>{children}</a>
+      <Link href={href} {...rest}>
+        {children}
       </Link>
     );
   }

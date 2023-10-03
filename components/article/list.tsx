@@ -37,11 +37,11 @@ const Headline: FunctionComponent<Props> = ({ posts }: Props) => (
           <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:opacity-75 transition duration-300 ease-in-out" />
           <div className="relative w-full h-full px-4 sm:px-6 lg:px-4 flex justify-center items-center">
             <h3 className="text-center">
-              <Link href={`/article/${slug}`}>
-                <a className="text-white text-lg font-bold">
-                  <span className="absolute inset-0" />
-                  <EllipsisText length={100} text={title} />
-                </a>
+              <Link href={`/article/${slug}`} className="text-white text-lg font-bold">
+
+                <span className="absolute inset-0" />
+                <EllipsisText length={100} text={title} />
+
               </Link>
             </h3>
           </div>

@@ -41,14 +41,14 @@ const Article: NextPage<Props> = ({ posts, categories }: Props) => (
           {categories.map((row, i, arr) => {
             return (
               <Fragment key={`cat_${i.toString()}`}>
-                <Link href={`/category/${row.slug}`}>
-                  <a className="hover:text-sky-800">
+                <Link href={`/category/${row.slug}`} className="hover:text-sky-800">
+
                   {row.title}
-                  </a>
+
                 </Link>
                 {(i + 1 < arr.length) && (<>&nbsp;/&nbsp;</>)}
               </Fragment>
-            )
+            );
           })}
         </div>
       </div>

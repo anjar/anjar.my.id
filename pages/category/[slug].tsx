@@ -53,8 +53,7 @@ interface Props {
   categories: Record<string, string>[];
 };
 const Article: NextPage<Props> = ({ posts, category, categories }: Props) => {
-  return (
-  <>
+  return <>
     <MetaTag />
     <div className="flex flex-col text-center ">
       <div>
@@ -66,8 +65,8 @@ const Article: NextPage<Props> = ({ posts, category, categories }: Props) => {
           {categories.map((row, i, arr) => {
             return (
               <Fragment key={`cat_${i.toString()}`}>
-                <Link href={`/category/${row.slug}`}>
-                  <a className="hover:text-sky-800">{row.title}</a>
+                <Link href={`/category/${row.slug}`} className="hover:text-sky-800">
+                  {row.title}
                 </Link>
                 {i + 1 < arr.length && <>&nbsp;/&nbsp;</>}
               </Fragment>
@@ -80,7 +79,6 @@ const Article: NextPage<Props> = ({ posts, category, categories }: Props) => {
     <section className="mt-6 mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
       <ArticleList posts={posts} />
     </section>
-  </>
-)};
+  </>;};
 
 export default Article;
