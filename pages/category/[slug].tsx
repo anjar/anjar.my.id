@@ -1,5 +1,5 @@
 import type { GetStaticProps, NextPage } from "next";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import slugify from "slugify";
 import pick from "lodash/pick";
 import Link from "next/link";

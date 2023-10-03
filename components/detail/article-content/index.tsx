@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import slugify from "slugify";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import Image from "next/future/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import gfm from "remark-gfm";
 
