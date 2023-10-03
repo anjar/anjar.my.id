@@ -102,9 +102,9 @@ const DetailArticleContent: FunctionComponent<Props> = ({ article }: Props) => {
               remarkPlugins={[gfm]}
               children={article?.body.raw}
               components={{
-                code({ inline, className, children, ...props }) {
+                code({ className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || "");
-                  return !inline && match ? (
+                  return match ? (
                     <SyntaxHighlighter
                       children={String(children).replace(/\n$/, "")}
                       style={vscDarkPlus}

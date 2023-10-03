@@ -34,7 +34,7 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
     <MetaTag title="Anjar Febrianto - Husband, Father, Programmer and ProGamer wannabe" />
     <div className="flex flex-col text-center ">
       <div>
-        <Image src="/images/static/me-cartoon.jpg" width="155" height="155" alt="User Image" className="rounded-full" />
+        <Image src="/images/static/luffy.jpg" width="155" height="155" alt="Anjar Febrianto" className="rounded-full" />
       </div>
       <div className="justify-items-center grid">
         <h1 className="text-4xl font-bold">Anjar Febrianto</h1>

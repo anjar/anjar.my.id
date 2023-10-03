@@ -22,7 +22,7 @@ const Headline: FunctionComponent<Props> = ({ posts }: Props) => (
       return (
         <article
           key={`posts_${idx.toString()}`}
-          className="relative w-full h-64 bg-cover bg-center group overflow-hidden shadow-lg hover:shadow-2xl  transition duration-300 ease-in-out rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-1"
+          className="relative w-full h-64 bg-cover bg-center group overflow-hidden shadow-lg hover:shadow-2xl  duration-300 rounded-lg transition ease-in-out transform hover:-translate-y-1"
           style={bgStyle}
         >
           {image && (

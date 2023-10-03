@@ -9,12 +9,12 @@ tags : [WSL, Windows, Docker]
 
 Nah di WSL 2 ini ada salah satu fitur yaitu bisa menggunakan docker secara native. Jadi ada konfigurasi baru di Docker untuk menggunakan WSL 2 Engine dan menggantikan Hyper-V.
 
-![Docker With WSL 2](https://i.ibb.co/1K2GXj2/WSL-Tips-Docker-Setting.png)
+![Docker With WSL 2](/images/articles/2021/WSL-Tips-Docker-Setting.png)
 
 
 Docker Dekstop ini juga akan menggunakan fitur dynamic memory allocation-nya WSL 2. Walaupun ini fitur yang bagus, tapi ternyata ada masalah dengan konsumsi memory di Windows,  ketika menggunakan WSL, Docker dan VS Code, seperti screenshoot berikut:
 
-![konsumsi memory sampai 90% lebih](https://i.ibb.co/tB43yjJ/wsl-task-manager.png)
+![konsumsi memory sampai 90% lebih](/images/articles/2021/wsl-task-manager.png)
 
 Nah, jika masih menggunakan Hyper-V di Docker, terdapat setting untuk alokasi Memory dan CPU, tapi jika menggunakan WSL 2, lebih sedikit tricky ternyata, caranya dengan membuat file *.wslconfig* di dalem folder User , sebelumnya matikan dulu semua instance wsl (termasuk docker-desktop)
 ```bash
@@ -30,4 +30,4 @@ processors=3 # Makes the WSL 2 VM use 3 virtual processors
 
 Save file tersebut, kemudian restart Docker Desktop, dan nyalakan wsl instance distro-nya kembali, kemudian run docker container kembali. Bisa di cek di Task Manager, setelah semua container nyala, konsumsi CPU & Memory tidak sampai 90%.
 
-![Setelah limit wsl](https://i.ibb.co/R4VG5RN/wsl-dsetting.png)
+![Setelah limit wsl](/images/articles/2021/wsl-dsetting.png)

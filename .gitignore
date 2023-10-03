@@ -44,3 +44,4 @@ tsconfig.tsbuildinfo
 public/sitemap-*.xml
 .vscode/extensions.json
 .contentlayer
+*:Zone.Identifier

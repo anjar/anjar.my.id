@@ -25,7 +25,7 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
 
   return (
     <article className="recipe-article">
-      <header>
+      <div>
         <h1 className="mb1 px3">{article.title}</h1>
 
         <address className="ampstart-byline clearfix mb4 px3 h5">
@@ -48,24 +48,24 @@ const DetailArticleContent:FunctionComponent<Props> = ({ article }: Props) => {
               />
             )}
 
-      </header>
+      </div>
       <ReactMarkdown
         className="prose dark:prose-dark md:prose-lg"
         remarkPlugins={[gfm]}
         children={article?.body.raw}
         components={{
           code({
-            inline, className, children, ...props
+            className, children, ...props
           }) {
             const match = /language-(\w+)/.exec(className || '');
-            return !inline && match ? (
+            return match ? (
               <>
                 <SyntaxHighlighter
                   children={String(children).replace(/\n$/, '')}
                   style={vscDarkPlus as any}
                   language={match[1]}
                   PreTag="div"
-                  { ...props }
+                  // { ...props }
                 />
               </>
             ) : (
